@@ -20,3 +20,44 @@
 .App-link {
   color: #09d3ac;
 }
+
+.alternative-download {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  margin-bottom: 10px;  
+}
+.alternative-download-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+
+.alternative-download-info:nth-child(even) {
+  background-color: #ebebeb;
+  color: #282c34;
+}
+.alternative-download-info:nth-child(odd) {
+  background-color: #ddd;
+  color: #282c34;
+}
+.alternative-download-info  span {
+  display: block;
+  font-size: 12px;
+  text-align: center;
+}
+.alternative-download-info  span + span {
+  border-left: 1px solid #333;
+  padding-left: 10px;
+}
+.alternative-download > h2 {
+  background-color: #282c34;
+  color: #ebebeb;
+  margin: 0;
+  padding: 10px 15px;
+}
+
+.alternative-download-info.cinema {
+  text-decoration: line-through;
+  color: #b9b9b9;
+}
