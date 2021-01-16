@@ -3,15 +3,21 @@
     "version": "1.1.0",
     "private": true,
     "dependencies": {
+        "@octokit/core": "^3.2.4",
+        "chalk": "^4.1.0",
+        "concat-files": "^0.1.1",
+        "mkdirp": "^1.0.4",
         "react": "^16.12.0",
         "react-app-rewired": "^2.1.5",
         "react-dom": "^16.12.0",
-        "react-scripts": "^3.4.3"
+        "react-scripts": "^3.4.3",
+        "webpack-dev-server": "^3.11.0"
     },
     "scripts": {
-        "start": "PORT=8124 react-app-rewired start",
-        "finalize": "mkdir -p ../dist && cp src/userscript-header.js ../dist/react-userscripts.user.js && cat build/static/js/main.js >> ../dist/react-userscripts.user.js",
+        "start": "cross-env PORT=8124 react-app-rewired start",
+        "finalize": "node gen_bundle.js",
         "build": "react-app-rewired build && npm run finalize",
+        "deploy": "npm run build && node deploy.js",
         "debug-build": "react-app-rewired --inspect-brk=5858 build && npm run finalize",
         "test": "react-app-rewired test",
         "eject": "react-app-rewired eject"
@@ -30,5 +36,8 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.2"
     }
 }

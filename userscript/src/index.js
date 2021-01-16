@@ -12,10 +12,8 @@ log("React script has successfully started");
 async function main() {
     // Find <body/>. This can be any element. We wait until
     // the page has loaded enough for that element to exist.
-    const body = await awaitElement("#viewport");
-    const container = document.createElement("div");
-    body.appendChild(container);
-    ReactDOM.render(<App />, container);
+    const toolsMenu = await awaitElement("#xmo-tools");
+    ReactDOM.render(<App />, toolsMenu);
 }
 
 // Call `main()` every time the page URL changes, including on first load.

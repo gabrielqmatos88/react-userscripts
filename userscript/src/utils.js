@@ -57,7 +57,7 @@ export function addLocationChangeCallback(callback) {
  * @returns {DOMNode}
  */
 export async function awaitElement(selector) {
-    const MAX_TRIES = 60;
+    const MAX_TRIES = 100;
     let tries = 0;
     return new Promise((resolve, reject) => {
         function probe() {
@@ -83,3 +83,61 @@ export async function awaitElement(selector) {
         delayedProbe();
     });
 }
+
+export async function awaitObjPath(obj, path) {
+    const MAX_TRIES = 100;
+    let tries = 0;
+    return new Promise((resolve, reject) => {
+        function probe() {
+            tries++;
+            return  getProp(obj, path);
+        }
+
+        function delayedProbe() {
+            if (tries >= MAX_TRIES) {
+                log("Can't find obj with path", path);
+                reject();
+                return;
+            }
+            const getObj = probe();
+            if (getObj) {
+                resolve(getObj);
+                return;
+            }
+
+            window.setTimeout(delayedProbe, 250);
+        }
+
+        delayedProbe();
+    });
+}
+
+export function getProp(obj, path, defaultValue) {
+    if (!path || !obj) {
+        return defaultValue;
+    }
+    // magic to add support to arrays e.g:  getProp(obj, 'mydata.result[0].name');
+    path = path.replace(/\[['"]?([a-z0-9_]+)['"]?\]/ig, '.$1').replace(/(^\.|\.$)/, '');
+    var pathArr = path.split('.');
+    var tmpConfig;
+    for (var i = 0; i < pathArr.length; i++) {
+        var tmpPath = pathArr[i];
+        var isModule = false;
+        //trying to load at first time
+        if (!tmpConfig) {
+            tmpConfig = obj[tmpPath];
+            isModule = !!tmpConfig;
+        }
+        //check if it's empty again to validate if it has the module
+        if (!tmpConfig) {
+            tmpConfig = defaultValue;
+            break;
+        }
+
+        if (isModule) {
+            continue;
+        }
+        tmpConfig = tmpConfig[tmpPath];
+    }
+    return tmpConfig !== null && tmpConfig !== undefined ? tmpConfig : defaultValue;
+};
