@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Xmo Tool - Reactjs
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  just testing :D
 // @author       gabriel.q.matos@gmail.com
 // @match        http://**
