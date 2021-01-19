@@ -141,3 +141,4 @@ export function getProp(obj, path, defaultValue) {
     }
     return tmpConfig !== null && tmpConfig !== undefined ? tmpConfig : defaultValue;
 };
+

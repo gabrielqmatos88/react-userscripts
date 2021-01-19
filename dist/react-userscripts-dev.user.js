@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         Xmo Tool - Reactjs
+// @name         Xmo Tool - Reactjs dev
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  try to take over the world!
@@ -32,11 +32,10 @@ function log(...args) {
 log("Dev mode started");
 
 async function main() {
-  const resp = await fetch("http://localhost:3000/static/js/main.js")
+  const resp = await fetch("http://localhost:8124/static/js/main.js")
   const script = await resp.text();
   log("Got Dev script")
   eval(script)
-  alert('oi');
   log("Dev script evaled");
 }
 
