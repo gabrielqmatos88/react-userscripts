@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react';
 import { FileDrop } from 'react-file-drop';
-import classnames from 'classnames';
 import FormHeader from '../components/FormHeader';
-import If from '../components/If';
 import './GuiCoreUpload.css'
+import classnames from 'classnames';
+import If from '../components/If';
 import { getProp } from '../utils';
 const $ = window.$;
 

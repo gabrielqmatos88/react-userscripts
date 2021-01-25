@@ -4,6 +4,7 @@ import If from './components/If';
 import Menu from './components/Menu';
 import ModalForm from './components/ModalForm';
 import ChangePassword from './pages/change-password';
+import GetInfo from './pages/GetInfo';
 import GuiCoreUpdate from './pages/GuiCoreUpdate';
 import { awaitObjPath, getProp, log } from './utils';
 const $ = window.$;
@@ -141,6 +142,13 @@ function App() {
     }
   };
 
+  const doLogin = (user, pass) => {
+    try {
+      $.xmo.login(user, pass);
+      window.location.reload();
+    } catch (error) {}
+  };
+
   const menuItems = [
     {
       id: 'm-session',
@@ -154,17 +162,15 @@ function App() {
               id: 'ocl-internal',
               label: 'internal',
               action: () => {
-                try {
-                  $.xmo.login('internal', '');
-                  window.location.reload();
-                } catch (error) {
-                  
-                }
+                doLogin('internal', '');
               }
             },
             {
               id: 'ocl-admin',
-              label: 'admin'
+              label: 'admin',
+              action: () => {
+                doLogin('admin', 'admin');
+              }
             }
           ]
         },
@@ -191,9 +197,7 @@ function App() {
             try {
               $.xmo.logout(true);
               window.location.reload();
-            } catch (error) {
-              
-            }
+            } catch (error) {}
           }
         }
       ]
@@ -236,6 +240,16 @@ function App() {
         setModalComp({
           key: 'chpwd',
           comp: ChangePassword
+        });
+      }
+    },
+    {
+      id: 'get-info',
+      label: 'Software Version',
+      action: () => {
+        setModalComp({
+          key: 'get-info',
+          comp: GetInfo
         });
       }
     }

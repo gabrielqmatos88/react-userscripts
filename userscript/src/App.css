@@ -188,3 +188,29 @@
   -moz-border-radius: 3px 0 0 3px;
   border-radius: 3px 0 0 3px;
 }
+
+.software-version-box {
+  box-sizing: border-box;
+  padding: 10px;
+  background: #2ab72e;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.info-line {
+  display: flex;
+  justify-content: space-between;
+  min-width: 400px;
+  background: #2ab72e;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.info-line > * {
+  width: 50%;
+  word-break: break-word;
+}
+
+.info-line:nth-child(odd) {
+  background: #197924;
+}

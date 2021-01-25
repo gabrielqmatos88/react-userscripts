@@ -38,7 +38,7 @@ const ChangePassword = ({ onClose }) => {
     },[state.password, encryption]);
 
     const formattedCommand = (user, pw) => {
-        return `xmo-client -p "Device/UserAccounts/Users/User[Login='${user}']" -s "${pw}"`;
+        return `xmo-client -p "Device/UserAccounts/Users/User[Login='${user}']/Password" -s "${pw}"`;
     };
     const EncPassword = ({ user, pw }) => {
         return (
