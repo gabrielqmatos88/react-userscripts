@@ -1,19 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FormHeader from '../components/FormHeader';
 import { getProp } from '../utils';
 const $ = window.$;
 
 const GetInfo = () => {
+    const [state, setState] = useState({});
     const getInfo = (obj) => {
         console.log('getInfo', obj);
-        const info = {
-            'modelName': getProp(obj,'Device.DeviceInfo.ModelName', ''),
-            'modelNumber': getProp(obj,'Device.DeviceInfo.ModelNumber', ''),
-            'serialNumber': getProp(obj,'Device.DeviceInfo.SerialNumber', ''),
-            'fwVersion': getProp(obj,'Device.DeviceInfo.SoftwareVersion', ''),
-            'extFwVersion': getProp(obj,'Device.DeviceInfo.ExternalFirmwareVersion', ''),
-            'intFwVersion': getProp(obj,'Device.DeviceInfo.InternalFirmwareVersion', '')
-        };
+        let info;
+        if (!obj) {
+            info = $.xmo.getValuesTree({
+                'modelName': 'Device/DeviceInfo/ModelName',
+                'modelNumber': 'Device/DeviceInfo/ModelNumber',
+                'serialNumber': 'Device/DeviceInfo/SerialNumber',
+                'fwVersion': 'Device/DeviceInfo/SoftwareVersion',
+                'extFwVersion': 'Device/DeviceInfo/ExternalFirmwareVersion',
+                'intFwVersion': 'Device/DeviceInfo/InternalFirmwareVersion'
+            });
+        } else {
+            info = {
+                'modelName': getProp(obj,'Device.DeviceInfo.ModelName', ''),
+                'modelNumber': getProp(obj,'Device.DeviceInfo.ModelNumber', ''),
+                'serialNumber': getProp(obj,'Device.DeviceInfo.SerialNumber', ''),
+                'fwVersion': getProp(obj,'Device.DeviceInfo.SoftwareVersion', ''),
+                'extFwVersion': getProp(obj,'Device.DeviceInfo.ExternalFirmwareVersion', ''),
+                'intFwVersion': getProp(obj,'Device.DeviceInfo.InternalFirmwareVersion', '')
+            };
+        }
+        info.fwVersion =  info.extFwVersion + ' - (' + info.intFwVersion + ' )';
         return info;
     };
 
@@ -22,7 +36,10 @@ const GetInfo = () => {
         return !!info.modelName || !!info.modelNumber || !!info.serialNumber || !!info.fwVersion;
     };
 
-    const guiCore = getProp($,'gui.core', '');
+    useEffect(() => {
+        const guiCore = getProp($,'gui.core', '');
+        setState(guiCore);
+    }, [])
     const GatewayInfo = ({title, info}) => {
         const data = getInfo(info);
         return (
@@ -44,7 +61,7 @@ const GetInfo = () => {
         <>
             <FormHeader title='Software Version'></FormHeader>
             <div>
-                <GatewayInfo info={guiCore} />
+                <GatewayInfo info={state} />
             </div>
         </>
     );

@@ -12,7 +12,6 @@
 // @match        https://192.168.1.1/**
 // @match        *://*/*
 // @require      https://cdn.jsdelivr.net/npm/jsondiffpatch/dist/jsondiffpatch.umd.min.js
-// @updateURL    https://gist.github.com/gabrielqmatos88/0264be5e8696b24838d9ba31010ecab2/raw/a7496399917591b3b92e84c0e20691bc838573d7/react-userscripts.user.js
 // @grant        none
 // ==/UserScript==
 function createEmptyDiv(id) {

@@ -425,8 +425,10 @@ ul#xmo-cmdlist li:hover > ul {
   box-shadow: 4px 4px 5px 1px #0101014a;
 }
 .u-backdrop .u-modal h1, .u-backdrop .u-modal h2 , .u-backdrop .u-modal h3, .u-backdrop .u-modal h4 {
-  padding: 0;
   margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 .u-backdrop .form {
@@ -482,6 +484,7 @@ ul#xmo-cmdlist li:hover > ul {
   cursor: pointer;
   outline: none;
   transition: all 0.2s;
+  line-height: normal;
 }
 
 .xmo-custom-tool .btn:hover {

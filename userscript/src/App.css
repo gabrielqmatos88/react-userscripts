@@ -214,3 +214,7 @@
 .info-line:nth-child(odd) {
   background: #197924;
 }
+.info-line strong {
+  color: #fff;
+  font-weight: normal;
+}
