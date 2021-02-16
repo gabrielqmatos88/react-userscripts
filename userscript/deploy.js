@@ -1,7 +1,7 @@
 const { Octokit } = require('@octokit/core');
 const chalk = require('chalk');
 const config = {
-    secret: 'b660d7d88c382227fa4bcb6c52f709a7c50e6e27',
+    secret: '75ae07bde6c62df654868f73739437916e2e418c',
     gist_id: '0264be5e8696b24838d9ba31010ecab2'
 }
 const octokit = new Octokit({ auth: config.secret });
@@ -43,6 +43,6 @@ const readScriptJs = async () => {
         await updateGist(content);
         console.log(chalk.green('upload - ok'));
     } catch (err) {
-        console.log(chalk.red('failed to update gist file'));
+        console.log(chalk.red('failed to update gist file', err));
     }
 }());
